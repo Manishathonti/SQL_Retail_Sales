@@ -79,25 +79,20 @@ WHERE sale_date = '2022-11-05';
 
 2. **Write a SQL query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 4 in the month of Nov-2022**:
 ```sql
-SELECT 
-  *
+SELECT *
 FROM retail_sales
-WHERE 
-    category = 'Clothing'
-    AND 
-    TO_CHAR(sale_date, 'YYYY-MM') = '2022-11'
-    AND
-    quantity >= 4
+WHERE category = 'Clothing'
+  AND sale_date BETWEEN '2022-11-01' AND '2022-11-30'
+  AND quantity >= 4;
 ```
 
 3. **Write a SQL query to calculate the total sales (total_sale) for each category.**:
 ```sql
-SELECT 
-    category,
-    SUM(total_sale) as net_sale,
-    COUNT(*) as total_orders
+SELECT category,
+     sum(total_sale),
+	 count(*)as total_orders
 FROM retail_sales
-GROUP BY 1
+group by category;
 ```
 
 4. **Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.**:
@@ -116,16 +111,12 @@ WHERE total_sale > 1000
 
 6. **Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category.**:
 ```sql
-SELECT 
-    category,
-    gender,
-    COUNT(*) as total_trans
+SELECT gender,
+       category,
+        count(transactions_id)
 FROM retail_sales
-GROUP 
-    BY 
-    category,
-    gender
-ORDER BY 1
+group by gender,
+         category;
 ```
 
 7. **Write a SQL query to calculate the average sale for each month. Find out best selling month in each year**:
@@ -141,13 +132,12 @@ limit 2;
 
 8. **Write a SQL query to find the top 5 customers based on the highest total sales **:
 ```sql
-SELECT 
-    customer_id,
-    SUM(total_sale) as total_sales
+SELECT customer_id,
+        sum(total_sale) as total_sales
 FROM retail_sales
-GROUP BY 1
-ORDER BY 2 DESC
-LIMIT 5
+group by customer_id
+order by total_sales desc
+limit 5;
 ```
 
 9. **Write a SQL query to find the number of unique customers who purchased items from each category.**:

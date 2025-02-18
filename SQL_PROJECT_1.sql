@@ -65,11 +65,11 @@ group by 1;
 
 SELECT 
        CASE
-			when extract(hour from sale_time) <= 12 then 'morning'
-			when extract(hour from sale_time) between 12 and 17 then 'afternoon'
-			else 'evning' 
-	   END as shift,
-	   count(transactions_id) as num_orders
+	when extract(hour from sale_time) <= 12 then 'morning'
+	when extract(hour from sale_time) between 12 and 17 then 'afternoon'
+	else 'evning' 
+       END as shift,
+       count(transactions_id) as num_orders
 FROM retail_sales
 GROUP BY shift;
 
